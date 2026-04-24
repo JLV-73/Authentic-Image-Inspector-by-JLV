@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Authentic Image Inspector by JLV — AI Image Forensic & Authenticity Analyzer</title>
+  <meta name="description" content="Premium forensic-style analyzer estimating whether an image is authentic, AI-generated, edited, or inconclusive. A probabilistic decision-support tool." />
+  <link rel="icon" type="image/jpeg" href="assets/logo_JLV.jpg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="brand">
+      <img src="assets/logo_JLV.jpg" alt="JLV logo" class="brand-logo" />
+      <div class="brand-text">
+        <h1>Authentic Image Inspector</h1>
+        <span class="brand-sub">by JLV · AI Image Forensic &amp; Authenticity Analyzer</span>
+      </div>
+    </div>
+    <div class="header-meta">
+      <span class="pill pill-version">v1.0 · April 2026</span>
+      <span class="pill pill-status" id="engineStatus">
+        <span class="dot"></span> Engine Ready
+      </span>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- HERO -->
+    <section class="hero glass">
+      <div class="hero-left">
+        <h2 class="hero-title">
+          Forensic-grade authenticity inspection
+          <span class="hero-accent">for the AI era.</span>
+        </h2>
+        <p class="hero-desc">
+          Upload an image to obtain a probabilistic verdict combining metadata provenance,
+          visual coherence indices, and forensic heuristics. Results are estimations — never
+          absolute truth.
+        </p>
+        <div class="hero-badges">
+          <span class="badge"><b>·</b> Local analysis</span>
+          <span class="badge"><b>·</b> No upload to external servers</span>
+          <span class="badge"><b>·</b> Privacy-first</span>
+        </div>
+      </div>
+      <div class="hero-right" aria-hidden="true">
+        <div class="scanner">
+          <div class="scanner-line"></div>
+          <div class="scanner-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- UPLOAD -->
+    <section id="uploadSection" class="glass upload-panel">
+      <header class="panel-head">
+        <h3>01 · Evidence Intake</h3>
+        <span class="panel-sub">Drop an image or browse</span>
+      </header>
+
+      <div id="dropZone" class="dropzone" tabindex="0" role="button" aria-label="Upload an image">
+        <input type="file" id="fileInput" accept="image/jpeg,image/jpg,image/png,image/webp,image/avif" hidden />
+        <svg class="dz-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true">
+          <path d="M12 16V4M12 4l-4 4M12 4l4 4" />
+          <path d="M4 14v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4" />
+        </svg>
+        <p class="dz-title">Drag &amp; drop an image here</p>
+        <p class="dz-sub">JPG · JPEG · PNG · WEBP · AVIF — processed entirely in your browser</p>
+        <button type="button" class="btn btn-primary" id="browseBtn">Browse file</button>
+      </div>
+
+      <div id="loader" class="loader hidden">
+        <div class="loader-bar"><div class="loader-fill"></div></div>
+        <p class="loader-text" id="loaderText">Initializing forensic engine…</p>
+      </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section id="results" class="results hidden">
+
+      <!-- FILE PREVIEW + VERDICT -->
+      <div class="grid-2">
+        <article class="glass card preview-card">
+          <header class="panel-head">
+            <h3>02 · Subject Preview</h3>
+            <button class="btn btn-ghost btn-sm" id="resetBtn" type="button">Reset</button>
+          </header>
+          <div class="preview-wrap">
+            <img id="previewImg" alt="Uploaded image preview" />
+          </div>
+          <dl class="file-info" id="fileInfo"></dl>
+        </article>
+
+        <article class="glass card verdict-card">
+          <header class="panel-head">
+            <h3>03 · Verdict</h3>
+            <span class="panel-sub" id="verdictTag">—</span>
+          </header>
+
+          <div class="score-hero">
+            <div class="score-ring" id="scoreRing" style="--p:0;--col:#38BDF8">
+              <div class="score-value"><span id="scoreNum">0</span><small>/100</small></div>
+              <div class="score-label">AI Probability</div>
+            </div>
+            <div class="score-meta">
+              <div class="meta-row"><span>Verdict</span><b id="verdictText">—</b></div>
+              <div class="meta-row"><span>Confidence</span><b id="confidenceText">—</b></div>
+              <div class="meta-row"><span>Risk level</span><b id="riskText">—</b></div>
+            </div>
+          </div>
+
+          <p class="verdict-summary" id="verdictSummary">
+            Awaiting analysis…
+          </p>
+        </article>
+      </div>
+
+      <!-- METADATA -->
+      <article class="glass card">
+        <header class="panel-head">
+          <h3>04 · Metadata &amp; Provenance</h3>
+          <span class="panel-sub">EXIF · C2PA signals · file integrity</span>
+        </header>
+        <div class="meta-grid" id="metaGrid"></div>
+        <p class="note">
+          The absence of metadata is not proof of AI generation. Many platforms strip this
+          data automatically during upload or sharing.
+        </p>
+      </article>
+
+      <!-- VISUAL ANALYSIS -->
+      <article class="glass card">
+        <header class="panel-head">
+          <h3>05 · Visual Heuristic Analysis</h3>
+          <span class="panel-sub">Face · Scene · Technical indices</span>
+        </header>
+        <div class="indices" id="indices"></div>
+      </article>
+
+      <!-- FORENSIC MAP -->
+      <article class="glass card">
+        <header class="panel-head">
+          <h3>06 · Forensic Map</h3>
+          <span class="panel-sub">Heuristic overlay of regions worth human review</span>
+        </header>
+        <div class="forensic-wrap">
+          <canvas id="forensicCanvas"></canvas>
+          <div class="legend">
+            <span><i style="background:#22C55E"></i>Low</span>
+            <span><i style="background:#F7931A"></i>Moderate</span>
+            <span><i style="background:#EF4444"></i>High</span>
+          </div>
+        </div>
+        <p class="note">
+          This heatmap highlights regions that may require human verification.
+          It is heuristic and does not constitute definitive proof.
+        </p>
+      </article>
+
+      <!-- EXPERT REPORT -->
+      <article class="glass card report-card">
+        <header class="panel-head">
+          <h3>07 · Expert Report</h3>
+          <div class="report-actions">
+            <button class="btn btn-ghost btn-sm" id="copyBtn" type="button">Copy</button>
+            <button class="btn btn-ghost btn-sm" id="printBtn" type="button">Print / PDF</button>
+            <button class="btn btn-primary btn-sm" id="generateBtn" type="button">Generate Report</button>
+          </div>
+        </header>
+        <pre class="report" id="reportBox">Click “Generate Report” to produce the expert analysis.</pre>
+      </article>
+
+      <!-- LIMITATIONS -->
+      <article class="glass card limits">
+        <header class="panel-head">
+          <h3>08 · Important Limitations</h3>
+        </header>
+        <p>
+          <b>Authentic Image Inspector by JLV</b> provides a probabilistic estimation based
+          on technical and visual indices. A compressed, cropped, edited, or screenshot-captured
+          image can significantly reduce analysis reliability. The absence of metadata is not
+          proof of AI generation. Only reliable provenance signatures — such as certain C2PA or
+          Content Credentials mechanisms — can provide stronger evidence of origin or modification.
+        </p>
+        <p class="note">
+          This tool does not perform facial recognition and must not be used to identify individuals.
+        </p>
+      </article>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="foot-left">
+      <img src="assets/logo_JLV.jpg" alt="" class="foot-logo" aria-hidden="true" />
+      <div>
+        <b>Authentic Image Inspector</b>
+        <span>Design &amp; Concept by JLV — April 2026</span>
+      </div>
+    </div>
+    <div class="foot-right">
+      <span>Probabilistic tool · Not a judicial proof</span>
+    </div>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

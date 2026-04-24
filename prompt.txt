@@ -1,0 +1,484 @@
+# MISSION CLAUDE CODE OPUS + SUPERPOWER
+
+Tu es Claude Code Opus, assisté du skill Superpower.
+
+Ta mission est de créer une application web professionnelle, moderne, robuste et premium nommée :
+
+AUTHENTIC IMAGE INSPECTOR by JLV
+Avril 2026
+
+Objectif :
+Créer une application web locale permettant d’analyser une photo ou une image afin d’estimer si elle est :
+- probablement réelle,
+- probablement générée par IA,
+- probablement retouchée,
+- ou impossible à déterminer avec certitude.
+
+L’application ne doit jamais prétendre fournir une certitude absolue.
+Elle doit produire un score de probabilité, un niveau de confiance, une analyse technique, une analyse visuelle, et un rapport clair.
+
+IMPORTANT :
+Cette application est un outil d’aide à l’analyse, pas un outil judiciaire.
+Elle doit afficher clairement que le résultat est probabiliste.
+
+---
+
+# CONTEXTE UTILISATEUR
+
+Le propriétaire du projet est Jean-Louis Viretti, alias JLV.
+
+Le style attendu est :
+- ultra professionnel,
+- premium,
+- dark mode,
+- sobre,
+- technologique,
+- élégant,
+- inspiré finance / cybersécurité / forensic lab,
+- rendu type cockpit d’analyse haut de gamme.
+
+Le logo JLV est fourni dans le dossier du projet sous forme d’image jointe.
+Tu dois l’intégrer dans l’interface, idéalement en haut à gauche ou en haut à droite, avec un rendu sobre et premium.
+
+---
+
+# NOM DU PROJET
+
+Authentic Image Inspector by JLV
+
+Sous-titre :
+AI Image Forensic & Authenticity Analyzer
+
+Mention temporelle :
+Avril 2026
+
+Signature :
+Design & Concept by JLV
+
+---
+
+# LIVRABLES ATTENDUS
+
+Créer un projet complet avec :
+
+1. index.html
+2. styles.css
+3. app.js
+4. README.md
+5. dossier /assets
+6. dossier /reports si nécessaire
+7. éventuellement /docs pour documentation technique
+8. aucun framework lourd obligatoire, sauf si tu juges React/Vite indispensable
+9. priorité à une version standalone HTML/CSS/JS propre et facilement lançable
+
+Le projet doit être clair, propre, documenté, et facile à ouvrir dans un navigateur.
+
+---
+
+# FONCTIONNALITÉS PRINCIPALES
+
+## 1. Upload d’image
+
+Créer une zone drag & drop premium permettant d’importer une image.
+
+Formats acceptés :
+- JPG
+- JPEG
+- PNG
+- WEBP
+- éventuellement AVIF si support navigateur disponible
+
+L’image importée doit être affichée immédiatement dans l’interface.
+
+Prévoir :
+- aperçu de l’image,
+- taille du fichier,
+- dimensions,
+- type MIME,
+- nom du fichier,
+- date éventuelle si disponible.
+
+---
+
+## 2. Analyse des métadonnées
+
+L’application doit tenter d’extraire et afficher les informations disponibles :
+
+- nom du fichier,
+- poids,
+- format,
+- largeur,
+- hauteur,
+- ratio,
+- date de dernière modification,
+- type MIME,
+- présence ou absence de métadonnées visibles,
+- indication si les métadonnées semblent absentes ou supprimées.
+
+Si possible en JavaScript pur, lire les métadonnées EXIF de base.
+Sinon prévoir une structure extensible et documenter les limites.
+
+Afficher une section :
+
+“Metadata & Provenance”
+
+Avec des indicateurs :
+- EXIF trouvé : oui/non
+- appareil photo détecté : oui/non
+- logiciel détecté : oui/non
+- C2PA / Content Credentials : détecté / non détecté / non supporté dans cette version
+- suspicion de suppression de métadonnées : faible / moyenne / forte
+
+Important :
+Ne jamais conclure automatiquement qu’une absence de métadonnées signifie IA.
+Afficher :
+“L’absence de métadonnées n’est pas une preuve. Beaucoup de plateformes suppriment automatiquement ces données.”
+
+---
+
+## 3. Analyse visuelle probabiliste
+
+Créer un moteur d’analyse simulé mais structuré, prêt à être connecté plus tard à une vraie API ou à un vrai modèle.
+
+Le système doit analyser plusieurs familles d’indices :
+
+### Indices visage / corps
+- peau trop lisse,
+- yeux incohérents,
+- dents ou bouche anormales,
+- mains ou doigts suspects,
+- oreilles asymétriques,
+- lunettes/reflets incohérents.
+
+### Indices scène
+- arrière-plan flou ou incohérent,
+- perspective anormale,
+- ombres incohérentes,
+- lumière non homogène,
+- objets fusionnés,
+- texte illisible ou déformé.
+
+### Indices techniques
+- bruit numérique incohérent,
+- compression étrange,
+- zones trop propres,
+- artefacts de génération,
+- répétitions de motifs.
+
+Créer un score par catégorie :
+- faible,
+- moyen,
+- élevé.
+
+Puis un score global :
+AI Probability Score : 0 à 100
+
+Exemple :
+- 0 à 30 : probablement réel
+- 31 à 60 : incertain / retouché possible
+- 61 à 80 : probablement généré ou fortement modifié par IA
+- 81 à 100 : forte probabilité IA
+
+Attention :
+Le score doit être présenté comme une estimation heuristique.
+Ne pas présenter une vérité absolue.
+
+---
+
+## 4. Analyse forensique visuelle
+
+Créer une section “Forensic Map”.
+
+Afficher une zone d’analyse avec :
+- aperçu image,
+- grille légère,
+- zones suspectes simulées sous forme de heatmap,
+- surlignage des zones potentiellement incohérentes,
+- légende.
+
+Même si la première version est heuristique ou simulée, l’architecture doit être prête pour brancher plus tard :
+- OpenCV,
+- modèle PyTorch,
+- API de détection,
+- analyse ELA,
+- analyse bruit/compression.
+
+Créer un commentaire clair :
+“Cette carte met en évidence les zones nécessitant une vérification humaine. Elle ne constitue pas une preuve définitive.”
+
+---
+
+## 5. Résultat final
+
+Créer une carte centrale de résultat avec :
+
+- Verdict :
+  - Probably Authentic
+  - Probably AI-Generated
+  - Possibly Edited
+  - Inconclusive
+
+- AI Probability Score
+- Confidence Level :
+  - Low
+  - Medium
+  - High
+
+- Risk Level :
+  - Low
+  - Moderate
+  - High
+  - Critical
+
+- Résumé automatique :
+  Exemple :
+  “L’image présente plusieurs indices compatibles avec une génération IA : métadonnées absentes, texture de peau anormalement uniforme, incohérences de lumière et artefacts dans l’arrière-plan. Le résultat reste probabiliste.”
+
+---
+
+## 6. Rapport détaillé
+
+Créer une section “Expert Report”.
+
+Le rapport doit comporter :
+
+1. Identification du fichier
+2. Résumé du verdict
+3. Score IA
+4. Niveau de confiance
+5. Analyse des métadonnées
+6. Analyse visuelle
+7. Analyse forensique
+8. Limites de l’analyse
+9. Recommandations
+
+Ajouter un bouton :
+“Generate Expert Report”
+
+Le rapport doit pouvoir être :
+- copié dans le presse-papiers,
+- imprimé,
+- exporté en PDF via la fonction navigateur window.print() dans une première version.
+
+Prévoir une mise en page print propre.
+
+---
+
+# DESIGN INTERFACE
+
+Créer un design premium.
+
+Style visuel :
+- fond noir profond,
+- cartes en verre sombre,
+- bordures fines lumineuses,
+- accents or / orange Bitcoin discret ou bleu forensic,
+- typographie moderne,
+- hiérarchie visuelle nette,
+- animations légères,
+- hover élégant,
+- pas de design gadget.
+
+Ambiance :
+- laboratoire forensic,
+- cybersécurité,
+- intelligence artificielle,
+- luxe technologique.
+
+Palette suggérée :
+- background : #05070A
+- panels : #0D1117
+- borders : rgba(255,255,255,0.10)
+- text main : #F5F7FA
+- text secondary : #9CA3AF
+- accent gold/orange : #F7931A
+- forensic blue : #38BDF8
+- risk red : #EF4444
+- success green : #22C55E
+
+Créer :
+- header premium avec logo JLV,
+- hero section,
+- upload panel,
+- dashboard de scores,
+- cartes d’analyse,
+- rapport expert,
+- footer avec signature.
+
+---
+
+# EXPÉRIENCE UTILISATEUR
+
+L’application doit être fluide et spectaculaire.
+
+À l’import d’une image :
+1. afficher l’image,
+2. afficher un loader d’analyse,
+3. calculer les informations disponibles,
+4. simuler/produire les scores,
+5. afficher progressivement les résultats,
+6. permettre de générer le rapport.
+
+Ajouter des micro-interactions :
+- animation de scan,
+- barre de progression,
+- glow léger,
+- apparition progressive des cartes,
+- compteur animé pour le score.
+
+---
+
+# ARCHITECTURE TECHNIQUE
+
+Créer un code propre.
+
+app.js doit contenir des modules/fonctions claires :
+
+- initApp()
+- handleFileUpload()
+- readImageMetadata()
+- analyzeImageHeuristics()
+- computeAIScore()
+- computeConfidenceLevel()
+- generateForensicMap()
+- generateExpertReport()
+- copyReport()
+- printReport()
+- resetAnalysis()
+
+styles.css doit être bien organisé :
+- variables CSS
+- layout
+- components
+- upload
+- dashboard
+- forensic
+- report
+- responsive
+- print
+
+index.html doit être sémantique et lisible.
+
+README.md doit expliquer :
+- objectif du projet,
+- installation,
+- utilisation,
+- limites,
+- architecture,
+- futures améliorations,
+- avertissement sur la fiabilité.
+
+---
+
+# LIMITES À AFFICHER DANS L’APPLICATION
+
+Inclure clairement une section :
+
+“Important Limitations”
+
+Texte recommandé :
+“Authentic Image Inspector by JLV fournit une estimation probabiliste basée sur des indices techniques et visuels. Une image compressée, recadrée, retouchée ou capturée via screenshot peut réduire fortement la fiabilité de l’analyse. L’absence de métadonnées ne constitue pas une preuve de génération IA. Seule une signature de provenance fiable, comme certains mécanismes C2PA ou Content Credentials, peut apporter une preuve plus forte d’origine ou de modification.”
+
+---
+
+# ROADMAP FUTURE À PRÉVOIR
+
+Dans README.md et éventuellement dans l’interface, prévoir une roadmap :
+
+Version 1 :
+- upload image,
+- analyse locale,
+- métadonnées de base,
+- score heuristique,
+- rapport expert.
+
+Version 2 :
+- intégration ExifTool côté backend,
+- analyse C2PA réelle,
+- détection Content Credentials,
+- export PDF avancé,
+- historique des analyses.
+
+Version 3 :
+- backend Python FastAPI,
+- OpenCV,
+- analyse ELA,
+- modèles IA spécialisés,
+- heatmap réelle,
+- comparaison avec base d’images.
+
+Version 4 :
+- détection vidéo,
+- détection audio,
+- analyse deepfake,
+- API professionnelle,
+- tableau de bord multi-fichiers.
+
+---
+
+# SÉCURITÉ ET ÉTHIQUE
+
+L’application ne doit pas :
+- identifier une personne,
+- faire de reconnaissance faciale,
+- rechercher une identité,
+- collecter des données personnelles,
+- envoyer l’image vers un serveur sans consentement explicite.
+
+Elle doit rester centrée sur :
+- authenticité du média,
+- probabilité de génération IA,
+- analyse technique,
+- rapport d’aide à la décision.
+
+Ajouter dans le README :
+“Cette application ne réalise pas de reconnaissance faciale et ne doit pas être utilisée pour identifier une personne.”
+
+---
+
+# QUALITÉ ATTENDUE
+
+Je veux un rendu impressionnant, propre, premium, et crédible.
+
+L’application doit être suffisamment belle pour être montrée en démo LinkedIn, IA Mastery ou à des professionnels.
+
+Le code doit être maintenable.
+
+Le résultat doit fonctionner immédiatement en local.
+
+Ne livre pas une coquille vide.
+Même si certaines analyses sont heuristiques en V1, elles doivent être structurées, crédibles, bien expliquées, et prêtes à évoluer.
+
+---
+
+# UTILISATION DU SKILL SUPERPOWER
+
+Utilise le skill Superpower pour :
+- organiser le projet proprement,
+- améliorer la qualité du code,
+- vérifier la cohérence globale,
+- structurer les composants,
+- produire une version propre et testable,
+- éviter les oublis,
+- proposer des améliorations pertinentes.
+
+Avant de finaliser, effectue une revue complète :
+- cohérence UI,
+- bugs JavaScript,
+- responsive design,
+- lisibilité du README,
+- qualité du rapport,
+- exactitude des avertissements,
+- absence de promesse mensongère.
+
+---
+
+# SORTIE ATTENDUE
+
+À la fin, fournis :
+1. la liste des fichiers créés,
+2. les instructions pour lancer l’application,
+3. les limites connues,
+4. les améliorations futures possibles.
+
+Commence maintenant la création complète du projet.
